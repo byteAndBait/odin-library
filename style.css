@@ -1,45 +1,57 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
-}
 body{
-    height: 100vh;
-    height: 100dvh;
-    display:flex;
-}
-.container{
-    width: 100%;
-    position:relative;
-    transition: 1s;
-    background-color: aqua;
-}
-.container .addButton , .card .closeButton{
-    position:absolute;
-    top: 10px;
-    right: 10px;
-    background: black;
-    padding: 10px 15px;
-    font-size: 1.5rem;
-    color: white;
-    border:none;
-}
-.card{
     position: relative;
-    background: white;
-    padding:20px;
-    margin: 20px;
+    background-size:cover;
+    aspect-ratio: 1/1;
+}
+main{
+    height:100vh;
+}
+
+main .booksGrid{
+    display:grid;
+    width:80%;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+}
+.booksGrid .book , .booksGrid .addBook{
+    height: 400px;
+    padding: 10px;
+    border: solid rgb(0,0,0,0.2) 1px;
     border-radius: 5px;
 }
-.card:first-child {
-    margin-top: 100px;
+
+main .booksGrid .addBook{
+    display:grid;
+    align-content: center;
+    place-items: center;
+    border: dotted 2px rgb(0,0,0,0.4);
+    color: grey;
 }
-.sideForm{
-    transition: 1s;
-    width: 0;
-    background-color: chartreuse;
+.booksGrid .addBook span{
+    font-size: 4rem;
+    padding: 30px;
+    width: 50px;
+    height: 50px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 4px rgb(0,0,0,0.4);
+    border-radius: 50vw;
 }
-.sideForm.open{
-    width: 60%;
-    padding: 20px;
+
+dialog{
+    position: absolute;
+   
 }
+dialog .dialogTitle{
+    font-size: 2rem;
+    margin: 5px;
+}
+dialog form{
+ display:grid;
+    gap: 20px;
+}
+dialog form input:not(input[type="checkbox"]){
+    display: block;
+    width:100%;
+}
+

@@ -7,35 +7,75 @@
     <title>Library Odin Project</title>
   </head>
   <body>
-    <div class="sideForm">
-        <p>
-          <label for="bookAuthorInput" >Author: </label>
-          <input type="text" id="bookAuthorInput" placeholder="e.g John Doe" value="John Doe" required />
-        </p>
-        <p>
-          <label for="bookTitleInput" >Title: </label>
-          <input
-            type="text"
-            id="bookTitleInput"
-            placeholder="e.g Treasure Island"
-            required
-            value="Treasure Island"
-            />
-        </p>
-        <p>
-          <label for="bookReadInput">Have Read? </label>
-          <input type="checkbox" id="bookReadInput"/>
-        </p>
-        <button class="cancel">Cancel</button>
-        <button class="submit">submit</button>
-
-    </div>
-    <div class="container">
-      <div class="addButton">+</div>
-      <div class="books">
-
+    <header>
+      <h1 class="logo">Library</h1>
+      <button onclick="document.querySelector('dialog').showModal()">
+        Add a book
+      </button>
+    </header>
+    <main>
+      <div class="booksGrid">
+        <div
+          class="addBook"
+          onclick="document.querySelector('dialog').showModal()"
+        >
+          <span>+</span>
+          <p>Add a book</p>
+        </div>
       </div>
-    </div>
+    </main>
+    <dialog class="dialog">
+      <div class="dialogTitle">Create a book!</div>
+      <form onsubmit="event.preventDefault();document.querySelector('dialog').close();">
+        <div>
+          <label for="title">Title of the book:</label>
+          <input type="text" name="title" id="title" required/>
+        </div>
+        <div>
+          <label for="author">Author of the book:</label>
+          <input type="text" name="author" id="author" required/>
+        </div>
+        <div>
+          <label for="genre">Genre:</label>
+          <select name="genre" id="genre" required>
+            <option value="science-fiction">Science Fiction</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="mystery">Mystery</option>
+            <option value="thriller">Thriller</option>
+            <option value="horror">Horror</option>
+            <option value="romance">Romance</option>
+            <option value="historical-fiction">Historical Fiction</option>
+            <option value="biographies-memoirs">Biographies & Memoirs</option>
+            <option value="autobiographies">Autobiographies</option>
+            <option value="non-fiction">Non-Fiction</option>
+            <option value="poetry">Poetry</option>
+            <option value="cookbooks">Cookbooks</option>
+            <option value="travel">Travel</option>
+            <option value="self-help">Self-Help</option>
+            <option value="childrens">Children's</option>
+            <option value="young-adult">Young Adult</option>
+            <option value="humor" selected>Humor</option>
+            <option value="essays">Essays</option>
+            <option value="drama">Drama</option>
+            <option value="comics-graphic-novels">
+              Comics & Graphic Novels
+            </option>
+          </select>
+        </div>
+        
+        <div>
+          <label for="release">Release year of the book:</label>
+          <input type="number" max="2025" name="release" id="release" required/>
+        </div>
+
+        <div>
+          <label for="haveRead">Have read the book?</label>
+          <input type="checkbox" name="haveRead" id="haveRead" />
+        </div>
+        <input type="submit">
+      </form>
+      <button onclick="document.querySelector('dialog').close()">Cancel</button>
+    </dialog>
   </body>
 
   <script
