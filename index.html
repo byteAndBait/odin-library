@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Library Odin Project</title>
+  </head>
+  <body>
+    <div class="sideForm">
+        <p>
+          <label for="bookAuthorInput" >Author: </label>
+          <input type="text" id="bookAuthorInput" placeholder="e.g John Doe" value="John Doe" required />
+        </p>
+        <p>
+          <label for="bookTitleInput" >Title: </label>
+          <input
+            type="text"
+            id="bookTitleInput"
+            placeholder="e.g Treasure Island"
+            required
+            value="Treasure Island"
+            />
+        </p>
+        <p>
+          <label for="bookReadInput">Have Read? </label>
+          <input type="checkbox" id="bookReadInput"/>
+        </p>
+        <button class="cancel">Cancel</button>
+        <button class="submit">submit</button>
+
+    </div>
+    <div class="container">
+      <div class="addButton">+</div>
+      <div class="books">
+
+      </div>
+    </div>
+  </body>
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/eruda/3.4.3/eruda.min.js"
+    integrity="sha512-cDmB70h28kl47NuDUcO3/hqJ29T+Gxue9DA6hoENF9RPGN/AZuyI94ATk5MN9VXTiuTHw2v3iVT9sXLzMMF1sQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script>
+    eruda.init();
+    // eruda.show()
+  </script>
+  <script src="main.js"></script>
+</html>
