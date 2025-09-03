@@ -86,7 +86,9 @@ function generateBook(author, title, read){
         authorElement.textContent = book.author;
         titleElement.textContent = book.title;
         closeButton.textContent = "X"
-        readButton.textContent = book.read
+        closeButton.className = "closeButton"
+        readButton.textContent = book.read;
+        readButton.className = "readButton"
 
         card.appendChild(authorElement);
         card.appendChild(titleElement);
@@ -97,7 +99,16 @@ function generateBook(author, title, read){
         card.className = "card";
         containerElement.querySelector(".books").appendChild(card);
 
-        
+        // buttons functionality
+        let objectIndex = listOfBooks.indexOf(book);
+        closeButton.addEventListener("click",(e)=>{
+            listOfBooks.splice(objectIndex,1);
+            e.target.parentElement.remove()
+        })
+        readButton.addEventListener("click", ()=>{
+            book.readBook();
+            readButton.textContent = book.read
+        })
 }
 
 
@@ -114,4 +125,6 @@ function randomID(){
     }
     return randomID;
 }
-
+for(let i = 0; i<3; i++){
+    generateBook("Me","TOP library project","Have Read")
+}

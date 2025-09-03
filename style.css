@@ -14,7 +14,7 @@ body{
     transition: 1s;
     background-color: aqua;
 }
-.container .addButton{
+.container .addButton , .card .closeButton{
     position:absolute;
     top: 10px;
     right: 10px;
@@ -22,12 +22,17 @@ body{
     padding: 10px 15px;
     font-size: 1.5rem;
     color: white;
+    border:none;
 }
 .card{
+    position: relative;
     background: white;
     padding:20px;
     margin: 20px;
     border-radius: 5px;
+}
+.card:first-child {
+    margin-top: 100px;
 }
 .sideForm{
     transition: 1s;
