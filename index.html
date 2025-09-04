@@ -26,14 +26,16 @@
     </main>
     <dialog class="dialog">
       <div class="dialogTitle">Create a book!</div>
-      <form onsubmit="event.preventDefault();document.querySelector('dialog').close();">
+      
+      <form class="bookForm">
+
         <div>
           <label for="title">Title of the book:</label>
-          <input type="text" name="title" id="title" required/>
+          <input type="text" name="title" id="title" value="why am i stupid" required/>
         </div>
         <div>
           <label for="author">Author of the book:</label>
-          <input type="text" name="author" id="author" required/>
+          <input type="text" name="author" id="author" value="byteAndBait" required/>
         </div>
         <div>
           <label for="genre">Genre:</label>
@@ -65,17 +67,20 @@
         
         <div>
           <label for="release">Release year of the book:</label>
-          <input type="number" max="2025" name="release" id="release" required/>
+          <input type="number" max="2025" name="release" id="release" value="2009" required/>
         </div>
-
+        <div>
+          <label for="numberOfPages">Number of pages:</label>
+          <input type="number" name="numberOfPages" id="numberOfPages" value="230" required/>
+        </div>
         <div>
           <label for="haveRead">Have read the book?</label>
           <input type="checkbox" name="haveRead" id="haveRead" />
         </div>
         <input type="submit">
       </form>
-      <button onclick="document.querySelector('dialog').close()">Cancel</button>
-    </dialog>
+      <button onclick="dialog.close()">Cancel</button>
+    </dialog> 
   </body>
 
   <script
