@@ -1,57 +1,182 @@
-body{
-    position: relative;
-    background-size:cover;
-    aspect-ratio: 1/1;
+/* 
+*/
+img{
+  margin: 0 5px;
+  width: 20px;
 }
-main{
-    height:100vh;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  position: relative;
+  background-size: cover;
+  font-family: sans-serif;
+}
+main {
+  height: 100vh;
 }
 
-main .booksGrid{
-    display:grid;
-    width:80%;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+header {
+  padding: 20px 30px;
+  box-shadow: 0 0 7px rgb(0, 0, 0, 0.2);
+  display: grid;
+  position:sticky;
+  top:0;
+  background:white;
+  z-index:2;
+  grid-template-columns: repeat(3, 1fr);
 }
-.booksGrid .book , .booksGrid .addBook{
-    height: 400px;
-    padding: 10px;
-    border: solid rgb(0,0,0,0.2) 1px;
-    border-radius: 5px;
+header .logo {
+  grid-column: 2/3;
+  text-align: center;
+  font-family: "Dancing Script",sans;
+}
+header button {
+  background-color: white;
+  grid-column: 4/-1;
+  margin-left: auto;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  padding: 10px;
+  border:solid 1px black;
+  &:hover {
+    background: black;
+    color:white;
+  }
 }
 
-main .booksGrid .addBook{
-    display:grid;
-    align-content: center;
-    place-items: center;
-    border: dotted 2px rgb(0,0,0,0.4);
-    color: grey;
+main .booksGrid {
+  display: grid;
+  padding: 30px 0;
+  margin: 0 auto;
+  width: 75%;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
 }
-.booksGrid .addBook span{
-    font-size: 4rem;
-    padding: 30px;
-    width: 50px;
-    height: 50px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    border: solid 4px rgb(0,0,0,0.4);
+.booksGrid .card,
+.booksGrid .addBook {
+  padding: 15px;
+  border-radius: 5px;
+}
+
+main .booksGrid .addBook {
+  display: grid;
+  align-content: center;
+  place-items: center;
+  border: dotted 2px rgb(0, 0, 0, 0.4);
+  color: grey;
+  cursor: pointer;
+  transition: .7s;
+  &:hover{
+    background-color: rgb(0, 0, 0, 0.1);
+  }
+}
+
+.booksGrid .addBook span {
+  font-size: 4rem;
+  padding: 30px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 4px rgb(0, 0, 0, 0.4);
+  border-radius: 50vw;
+}
+
+
+main .booksGrid .card{
+  border: solid 1px rgb(0, 0, 0, 0.6);
+  min-height: 400px;  
+  position:relative;
+  display: grid;
+}
+
+
+.card .bottomBorder{
+  align-self: end;
+}
+.card .release{
+  position:absolute;
+  top:5px;
+  right:5px;
+}
+.booksGrid .title{
+    font-family: "Oswald", sans-serif;
+    overflow: clip;
+    text-wrap: wrap;
+    font-size: 3.2rem;
+    padding: 25px 0;
+}
+.booksGrid .card .author{
+  text-align: center;
+  font-weight: bold;
+}
+.booksGrid .card .genre{
+    width: fit-content;
+    text-align: center;
+    padding: 5px 10px;
     border-radius: 50vw;
+    background-color: #739EC9;
+    color:white;
+    margin: 2px;
 }
 
-dialog{
-    position: absolute;
-   
-}
-dialog .dialogTitle{
-    font-size: 2rem;
-    margin: 5px;
-}
-dialog form{
- display:grid;
-    gap: 20px;
-}
-dialog form input:not(input[type="checkbox"]){
-    display: block;
-    width:100%;
+.card .release{
+  right:5px;
 }
 
+.card .deleteBook{
+  display:grid;
+  place-items: center;
+  background:red;
+  z-index: 1;
+  border-radius: 50vw;
+  width:40px;
+  height:40px;
+  color:white;
+  padding: 5px;
+  left:5px;
+}
+.card .release , .card .deleteBook{
+  position: absolute;
+  opacity: 0%;
+  transition: .6s;
+  top:5px;
+}
+.card:hover .release , .card:hover .deleteBook{
+  opacity: 100%;
+}
+dialog {
+  position: absolute;
+  top:50%;
+  left:50%;
+  border: 1px solid rgb(0, 0, 0, 0.6);
+  border-radius: 8px;
+  padding: 15px 25px;
+  transform: translate(-50%,-50%);
+}
+dialog .dialogTitle {
+  font-size: 2rem;
+  margin: 5px;
+}
+dialog form {
+  display: grid;
+  gap: 20px;
+}
+dialog form input:not(input[type="checkbox"]) {
+  display: block;
+  width: 100%;
+}
+@media (max-width:800px){
+  .title{
+    font-size: 2.8rem!important;
+  }
+  .card .release , .card .deleteBook{
+    opacity:100%;
+
+  }
+}

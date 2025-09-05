@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>Library Odin Project</title>
-  </head>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Asimovian&family=Dancing+Script:wght@700&family=Oswald:wght@600&family=Story+Script&display=swap" rel="stylesheet">
+  <!-- Font Awesome  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
   <body>
     <header>
       <h1 class="logo">Library</h1>
       <button onclick="document.querySelector('dialog').showModal()">
-        Add a book
+        + Add a book
       </button>
     </header>
     <main>
@@ -31,11 +37,11 @@
 
         <div>
           <label for="title">Title of the book:</label>
-          <input type="text" name="title" id="title" value="why am i stupid" required/>
+          <input type="text" name="title" id="title" value="How to win friends & influence people" required/>
         </div>
         <div>
           <label for="author">Author of the book:</label>
-          <input type="text" name="author" id="author" value="byteAndBait" required/>
+          <input type="text" name="author" id="author" maxlength="40" value="Dale Carniegie" required/>
         </div>
         <div>
           <label for="genre">Genre:</label>
@@ -58,6 +64,8 @@
             <option value="young-adult">Young Adult</option>
             <option value="humor" selected>Humor</option>
             <option value="essays">Essays</option>
+            <option value="CS">Computer Science</option>
+
             <option value="drama">Drama</option>
             <option value="comics-graphic-novels">
               Comics & Graphic Novels
@@ -67,15 +75,15 @@
         
         <div>
           <label for="release">Release year of the book:</label>
-          <input type="number" max="2025" name="release" id="release" value="2009" required/>
+          <input type="number" max="2025" name="release" id="release" value="1936" required/>
         </div>
         <div>
           <label for="numberOfPages">Number of pages:</label>
-          <input type="number" name="numberOfPages" id="numberOfPages" value="230" required/>
+          <input type="number" name="numberOfPages" id="numberOfPages" value="291" required/>
         </div>
         <div>
           <label for="haveRead">Have read the book?</label>
-          <input type="checkbox" name="haveRead" id="haveRead" />
+          <input type="checkbox" name="haveRead" id="haveRead"  />
         </div>
         <input type="submit">
       </form>

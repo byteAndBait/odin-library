@@ -2,10 +2,9 @@ let formElement = document.querySelector(".bookForm")
 let booksGridElement = document.querySelector(".booksGrid")
 let dialog = document.querySelector(".dialog") 
 let listOfBooks = [];
-
-function Book(author,title,haveRead,genre,release,numberOfPages,id){
-    this.author = author;
+function Book(title,author,haveRead,genre,release,numberOfPages,id){
     this.title = title;
+    this.author = author;
     this.haveRead = haveRead;
     this.genre = genre;
     this.release = release;
@@ -39,24 +38,30 @@ function generateBook(author,title,haveRead,genre,release,numberOfPages){
 function displayBook(book){
         let card = document.createElement("div")
         card.dataset.id = book.id
+        card.classList.add("card")
         card.innerHTML = `
-    <div class="upperBorder">
-          <div class="author">by ${book.author}</div>
-          <div class="release">${book.release}</div>
-      </div>
+    
+      <div class="release">${book.release}</div>
+<i class="deleteBook fa-solid fa-trash-can"></i>
       <h1 class="title">
         ${book.title}
       </h1>
+      
+      <div class="bottomBorder">
+    <div class="author">
+          by: 
+          ${book.author}</div>
+
       <div class="genre">
         ${book.genre}
       </div>
       <div class="numberOfPages">
         No. of pages <span>${book.numberOfPages}</span>
       </div>
-      <div class="buttons">
-        <button class="deleteBook">Delete</button>
+        
         <button class="read">${book.haveRead == "read" ? "unread" : "read"}</button>
       </div>
+
     </div>
         `
         booksGridElement.appendChild(card)
@@ -73,9 +78,10 @@ booksGridElement.addEventListener("click", (e)=>{
 })
 
 function removeBook(e){
-    let currentBookIndex = listOfBooks.findIndex((o) => o.id == e.target.parentElement.parentElement.dataset.id);
+    let currentBookIndex = listOfBooks.findIndex((o) => o.id == e.target.parentElement.dataset.id);
+    console.log(e.target.parentElement)
     listOfBooks.splice(currentBookIndex,1);
-    e.target.parentElement.parentElement.remove();
+    e.target.parentElement.remove();
 }
 
 function toggleReadStatus(e){
@@ -91,3 +97,10 @@ function randomID(){
     }
     return randomID;
 }
+function getRandomNumber(max){
+  return (Math.round(Math.random() * max))
+}
+
+generateBook("How to master Web Development" ,"Abdulrahman",  "read" , "CS",2025,getRandomNumber(300))
+generateBook("How to master Web Development" ,"Abdulrahman",  "read" , "CS",2025,getRandomNumber(300))
+generateBook("How to master Web Development" ,"Abdulrahman",  "read" , "CS",2025,getRandomNumber(320))
