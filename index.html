@@ -43,7 +43,7 @@
           <label for="author">Author of the book:</label>
           <input type="text" name="author" id="author" maxlength="40" value="Dale Carniegie" required/>
         </div>
-        <div>
+        <div class="inline-grid">
           <label for="genre">Genre:</label>
           <select name="genre" id="genre" required>
             <option value="science-fiction">Science Fiction</option>
@@ -73,7 +73,7 @@
           </select>
         </div>
         
-        <div>
+        <div class="inline-grid">
           <label for="release">Release year of the book:</label>
           <input type="number" max="2025" name="release" id="release" value="1936" required/>
         </div>
@@ -81,13 +81,13 @@
           <label for="numberOfPages">Number of pages:</label>
           <input type="number" name="numberOfPages" id="numberOfPages" value="291" required/>
         </div>
-        <div>
+        <div class="checkbox">
           <label for="haveRead">Have read the book?</label>
           <input type="checkbox" name="haveRead" id="haveRead"  />
         </div>
-        <input type="submit">
+        <input type="submit" value="Create">
       </form>
-      <button onclick="dialog.close()">Cancel</button>
+<i onclick="dialog.close()" class="closeDialogButton fa-solid fa-xmark"></i>
     </dialog> 
   </body>
 
