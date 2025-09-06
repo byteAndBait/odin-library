@@ -8,8 +8,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Asimovian&family=Dancing+Script:wght@700&family=Oswald:wght@600&family=Story+Script&display=swap" rel="stylesheet">
-  <!-- Font Awesome  -->
+<link href="https://fonts.googleapis.com/css2?family=Asimovian&family=Dancing+Script:wght@700&family=Oswald:wght@600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
   <body>
@@ -20,16 +21,20 @@
       </button>
     </header>
     <main>
-      <div class="booksGrid">
+      <div class="booksGrid unreadSection">
         <div
           class="addBook"
           onclick="document.querySelector('dialog').showModal()"
         >
-          <span>+</span>
+          <i class="fa-solid fa-plus"></i>
           <p>Add a book</p>
         </div>
       </div>
+      <div class="booksGrid readSection">
+
+      </div>
     </main>
+
     <dialog class="dialog">
       <div class="dialogTitle">Create a book!</div>
       
@@ -37,11 +42,11 @@
 
         <div>
           <label for="title">Title of the book:</label>
-          <input type="text" name="title" id="title" value="How to win friends & influence people" required/>
+          <input type="text" name="title" id="title" value="" required/>
         </div>
         <div>
           <label for="author">Author of the book:</label>
-          <input type="text" name="author" id="author" maxlength="40" value="Dale Carniegie" required/>
+          <input type="text" name="author" id="author" maxlength="40" value="" required/>
         </div>
         <div class="inline-grid">
           <label for="genre">Genre:</label>
@@ -75,15 +80,15 @@
         
         <div class="inline-grid">
           <label for="release">Release year of the book:</label>
-          <input type="number" max="2025" name="release" id="release" value="1936" required/>
+          <input type="number" max="2025" name="release" id="release" value="" required/>
         </div>
         <div>
           <label for="numberOfPages">Number of pages:</label>
           <input type="number" name="numberOfPages" id="numberOfPages" value="291" required/>
         </div>
         <div class="checkbox">
-          <label for="haveRead">Have read the book?</label>
-          <input type="checkbox" name="haveRead" id="haveRead"  />
+          <label for="read">Have read the book?</label>
+          <input type="checkbox" name="read" id="read"  />
         </div>
         <input type="submit" value="Create">
       </form>
@@ -91,15 +96,5 @@
     </dialog> 
   </body>
 
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/eruda/3.4.3/eruda.min.js"
-    integrity="sha512-cDmB70h28kl47NuDUcO3/hqJ29T+Gxue9DA6hoENF9RPGN/AZuyI94ATk5MN9VXTiuTHw2v3iVT9sXLzMMF1sQ=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  ></script>
-  <script>
-    eruda.init();
-    // eruda.show()
-  </script>
   <script src="main.js"></script>
 </html>
