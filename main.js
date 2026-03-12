@@ -1,117 +1,138 @@
-let formElement = document.querySelector(".bookForm");
-let unreadSectionElement = document.querySelector(".unreadSection");
-let readSectionElement = document.querySelector(".readSection");
+const formElement = document.querySelector(".bookForm");
+const unreadSectionElement = document.querySelector(".unreadSection");
+const readSectionElement = document.querySelector(".readSection");
 
-let dialog = document.querySelector(".dialog");
-let listOfBooks = [];
-function Book(title, author, read, genre, release, numberOfPages, id) {
-  this.title = title;
-  this.author = author;
-  this.read = read;
-  this.genre = genre;
-  this.release = release;
-  this.numberOfPages = numberOfPages;
-  this.id = id;
+const dialogElement = document.querySelector(".dialog");
+const listOfBooks = [];
+
+class Book {
+  static #isConstructable = false;
+
+  constructor(title, author, read, genre, release, numberOfPages, id) {
+    if (!Book.#isConstructable) {
+      throw new TypeError("Book is not constructable");
+    }
+    Book.#isConstructable = false
+    this.title = title;
+    this.author = author;
+    this.read = read;
+    this.genre = genre;
+    this.release = release;
+    this.numberOfPages = numberOfPages;
+    this.id = id;
+  }
+  toggleInternalReadProperty() {
+    this.read = this.read ? false : true;
+  }
+  static generateBook(title, author, read, genre, release, numberOfPages, id) {
+    Book.#isConstructable = true;
+    let generatedBook = new Book(title, author, read, genre, release, numberOfPages, id)
+    listOfBooks.push(generatedBook);
+    displayBook(generatedBook);
+  }
 }
 
-Book.prototype.toggleRead = function () {
-  this.read = this.read ? false : true;
-};
+class Library {
+  
+}
 formElement.addEventListener("submit", (e) => {
   e.preventDefault();
-  dialog.close();
+  dialogElement.close();
 
-  generateBook(
+  Book.generateBook(
     formElement.querySelector("input[name='title']").value,
     formElement.querySelector("input[name='author']").value,
     formElement.querySelector("input[name='read']").checked,
     formElement.querySelector("select[name='genre']").value,
     formElement.querySelector("input[name='release']").value,
-    formElement.querySelector("input[name='numberOfPages']").value
+    formElement.querySelector("input[name='numberOfPages']").value,
+    crypto.randomUUID()
   );
 });
-function generateBook(author, title, read, genre, release, numberOfPages) {
-  let book = new Book(
-    author,
-    title,
-    read,
-    genre,
-    release,
-    numberOfPages,
-    randomID()
-  );
-  listOfBooks.push(book);
-  displayBook(book);
-}
+
 
 function displayBook(book) {
+  
   let card = document.createElement("div");
   card.dataset.id = book.id;
   card.classList.add("card");
-  card.innerHTML = `
-    
-      <div class="release">${book.release}</div>
-<i class="deleteBook fa-solid fa-trash-can"></i>
-      <h1 class="title">
-        ${book.title}
-      </h1>
-      
-      <div class="bottomBorder">
-    <div class="author">
-          by: 
-          ${book.author}</div>
+  const release = document.createElement("div");
+  release.className = "release";
+  release.textContent = book.release;
+  card.appendChild(release);
 
-      <div class="genre">
-        ${book.genre}
-      </div>
-      <div class="numberOfPages">
-        No. of pages: <span>${book.numberOfPages}</span>
-      </div>
-        
-        <button class="read">${
-          book.read
-            ? `<i class="fa-solid fa-book-open"></i>You have read it already`
-            : `<i class="fa-solid fa-book"></i> You didn't read it`
-        }</button>
-      </div>
+  const deleteBtn = document.createElement("i");
+  deleteBtn.className = "deleteBook fa-solid fa-trash-can";
+  card.appendChild(deleteBtn);
 
-    </div>
-        `;
-      handleDOMReadStatus(book,card)
+  const title = document.createElement("h1");
+  title.className = "title";
+  title.textContent = book.title;
+  card.appendChild(title);
+
+  const bottomBorder = document.createElement("div");
+  bottomBorder.className = "bottomBorder";
+
+  const author = document.createElement("div");
+  author.className = "author";
+  author.textContent = `by: ${book.author}`;
+  bottomBorder.appendChild(author);
+
+  const genre = document.createElement("div");
+  genre.className = "genre";
+  genre.textContent = book.genre;
+  bottomBorder.appendChild(genre);
+
+  const pages = document.createElement("div");
+  pages.className = "numberOfPages";
+  pages.innerHTML = `No. of pages: <span>${book.numberOfPages}</span>`;
+  bottomBorder.appendChild(pages);
+
+  const readBtn = document.createElement("button");
+  readBtn.className = "read";
+  readBtn.textContent = book.read
+    ? `📖 You have read it already`
+    : `📘 You didn't read it`;
+  bottomBorder.appendChild(readBtn);
+
+  card.appendChild(bottomBorder);
+  handleDOMReadStatus(book, card);
+  handleDOMReadStatus(book, card)
 }
 
-function handleDeletion(e) {
+
+document.querySelector("main.libraryBody").addEventListener("click", (e)=>{
   if (e.target.classList.contains("deleteBook")) {
     removeBook(e);
-  } else if (e.target.classList.contains("read")) {
-    toggleReadStatus(e);
+    return;
   }
-}
-unreadSectionElement.addEventListener("click", (e) => handleDeletion(e));
-readSectionElement.addEventListener("click", (e) => handleDeletion(e));
+  if (e.target.classList.contains("read")) {
+    toggleReadStatus(e);
+    return;
+  }
+})
 
 function removeBook(e) {
   let currentBookIndex = listOfBooks.findIndex(
-    (o) => o.id == e.target.parentElement.dataset.id
+    (book) => book.id == e.target.parentElement.dataset.id
   );
-  console.log(e.target.parentElement);
   listOfBooks.splice(currentBookIndex, 1);
   e.target.parentElement.remove();
 }
 
 function toggleReadStatus(e) {
   let cardElement = e.target.parentElement.parentElement;
-  let currentBook =
-    listOfBooks[listOfBooks.findIndex((o) => o.id == cardElement.dataset.id)];
-  currentBook.toggleRead();
-  handleDOMReadStatus(currentBook,cardElement)
-  e.target.innerHTML = currentBook.read
-    ? `<i class="fa-solid fa-book-open"></i>You have read it already`
-    : `<i class="fa-solid fa-book"></i> You didn't read it`;
+  let currentBookIndex = listOfBooks.findIndex((book) => book.id == cardElement.dataset.id)
+  let currentBook = listOfBooks[currentBookIndex];
+  currentBook.toggleInternalReadProperty();
+  handleDOMReadStatus(currentBook, cardElement)
+  e.target.textContent = currentBook.read
+    ? `📖 You have read it already`
+    : `📘 You didn't read it`;
 }
 
-function handleDOMReadStatus(book, element){
-  if (book.read) {
+function handleDOMReadStatus(bookObject, element) {
+  if (bookObject.read) {
     readSectionElement.appendChild(element);
     element.querySelector(".read").classList.add("haveRead");
   } else {
@@ -120,30 +141,23 @@ function handleDOMReadStatus(book, element){
   }
 }
 
-function randomID() {
-  let randomID = "";
-  for (let i = 0; i < 7; i++) {
-    randomID += Math.round(Math.random() * 10);
-  }
-  return randomID;
-}
-function getRandomNumber(max) {
-  return Math.round(Math.random() * max);
-}
 
-generateBook(
+Book.generateBook(
   "How to master Web Development",
   "Abdulrahman",
   false,
   "CS",
   2025,
-  getRandomNumber(300)
+  231,
+  crypto.randomUUID()
 );
-generateBook(
+
+Book.generateBook(
   "Motivation and Mindset",
   "The Odin Project",
   true,
   "CS",
   2025,
-  getRandomNumber(300)
+  23,
+  crypto.randomUUID()
 );
